@@ -1,0 +1,4 @@
+# Replace these reserved example names with targets you are authorized to scan.
+blog.example.com
+docs.example.com
+shop.example.com

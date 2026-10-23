@@ -1,0 +1,29 @@
+name: tests
+on: [push, pull_request]
+permissions:
+  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      matrix:
+        python: ["3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install -e '.[dev]'
+      - run: python -m pytest
+      - run: dangl3 --help
+      - run: dangl3 providers --json
+      - run: python examples/offline_demo.py > /tmp/dangl3-demo.json
+      - run: python -m json.tool /tmp/dangl3-demo.json > /dev/null
+      - run: python -m integration_lab.runner
+      - run: python -m build

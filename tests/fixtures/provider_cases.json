@@ -1,0 +1,318 @@
+{
+  "fixture_kind": "synthetic_from_documentation_and_historical_candidates",
+  "live_response_captures": false,
+  "cases": [
+    {
+      "id": "github_pages-provider_present",
+      "provider": "github_pages",
+      "kind": "provider_present",
+      "cname": "owner.github.io",
+      "status_code": 404,
+      "headers": {},
+      "body": "There isn't a GitHub Pages site here.",
+      "body_truncated": false,
+      "expected": "UNKNOWN",
+      "sources": [
+        "https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site",
+        "https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages"
+      ],
+      "notes": "Synthetic test, not a captured live response. DNS-only providers have no positive HTTP expectation; candidate text/status must remain inconclusive."
+    },
+    {
+      "id": "github_pages-negative",
+      "provider": "github_pages",
+      "kind": "negative",
+      "cname": "owner.github.io",
+      "status_code": 200,
+      "headers": {},
+      "body": "Ordinary healthy application page",
+      "body_truncated": false,
+      "expected": "UNKNOWN",
+      "sources": [
+        "https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site",
+        "https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages"
+      ],
+      "notes": "Synthetic test, not a captured live response. DNS-only providers have no positive HTTP expectation; candidate text/status must remain inconclusive."
+    },
+    {
+      "id": "github_pages-ambiguous",
+      "provider": "github_pages",
+      "kind": "ambiguous",
+      "cname": "owner.github.io",
+      "status_code": 404,
+      "headers": {},
+      "body": "There isn't a GitHub Pages site here.",
+      "body_truncated": false,
+      "expected": "UNKNOWN",
+      "sources": [
+        "https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site",
+        "https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages"
+      ],
+      "notes": "Synthetic test, not a captured live response. DNS-only providers have no positive HTTP expectation; candidate text/status must remain inconclusive."
+    },
+    {
+      "id": "aws_s3_website-provider_present",
+      "provider": "aws_s3_website",
+      "kind": "provider_present",
+      "cname": "bucket.s3-website-us-east-1.amazonaws.com",
+      "status_code": 404,
+      "headers": {
+        "server": "AmazonS3"
+      },
+      "body": "NoSuchBucket: The specified bucket does not exist",
+      "body_truncated": false,
+      "expected": "POTENTIAL_TAKEOVER",
+      "sources": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteEndpoints.html",
+        "https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints",
+        "https://docs.aws.amazon.com/AmazonS3/latest/API/API_Error.html",
+        "https://aws.amazon.com/blogs/security/threat-tactic-spotlight-subdomain-takeover/"
+      ],
+      "notes": "Synthetic test, not a captured live response. DNS-only providers have no positive HTTP expectation; candidate text/status must remain inconclusive."
+    },
+    {
+      "id": "aws_s3_website-negative",
+      "provider": "aws_s3_website",
+      "kind": "negative",
+      "cname": "bucket.s3-website-us-east-1.amazonaws.com",
+      "status_code": 200,
+      "headers": {
+        "server": "AmazonS3"
+      },
+      "body": "Ordinary healthy application page",
+      "body_truncated": false,
+      "expected": "NO_EVIDENCE",
+      "sources": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteEndpoints.html",
+        "https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints",
+        "https://docs.aws.amazon.com/AmazonS3/latest/API/API_Error.html",
+        "https://aws.amazon.com/blogs/security/threat-tactic-spotlight-subdomain-takeover/"
+      ],
+      "notes": "Synthetic test, not a captured live response. DNS-only providers have no positive HTTP expectation; candidate text/status must remain inconclusive."
+    },
+    {
+      "id": "aws_s3_website-ambiguous",
+      "provider": "aws_s3_website",
+      "kind": "ambiguous",
+      "cname": "bucket.s3-website-us-east-1.amazonaws.com",
+      "status_code": 404,
+      "headers": {
+        "server": "AmazonS3"
+      },
+      "body": "NoSuchBucket: The specified bucket does not exist NoSuchKey",
+      "body_truncated": false,
+      "expected": "UNKNOWN",
+      "sources": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteEndpoints.html",
+        "https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints",
+        "https://docs.aws.amazon.com/AmazonS3/latest/API/API_Error.html",
+        "https://aws.amazon.com/blogs/security/threat-tactic-spotlight-subdomain-takeover/"
+      ],
+      "notes": "Synthetic test, not a captured live response. DNS-only providers have no positive HTTP expectation; candidate text/status must remain inconclusive."
+    },
+    {
+      "id": "azure_app_service-provider_present",
+      "provider": "azure_app_service",
+      "kind": "provider_present",
+      "cname": "app.azurewebsites.net",
+      "status_code": 404,
+      "headers": {},
+      "body": "Azure 404 (Web App not found)",
+      "body_truncated": false,
+      "expected": "UNKNOWN",
+      "sources": [
+        "https://learn.microsoft.com/en-us/azure/security/fundamentals/subdomain-takeover",
+        "https://learn.microsoft.com/en-us/troubleshoot/azure/app-service/connection-issues-with-ssl-or-tls/troubleshoot-custom-domain-issues-azure-app-service"
+      ],
+      "notes": "Synthetic test, not a captured live response. DNS-only providers have no positive HTTP expectation; candidate text/status must remain inconclusive."
+    },
+    {
+      "id": "azure_app_service-negative",
+      "provider": "azure_app_service",
+      "kind": "negative",
+      "cname": "app.azurewebsites.net",
+      "status_code": 200,
+      "headers": {},
+      "body": "Ordinary healthy application page",
+      "body_truncated": false,
+      "expected": "UNKNOWN",
+      "sources": [
+        "https://learn.microsoft.com/en-us/azure/security/fundamentals/subdomain-takeover",
+        "https://learn.microsoft.com/en-us/troubleshoot/azure/app-service/connection-issues-with-ssl-or-tls/troubleshoot-custom-domain-issues-azure-app-service"
+      ],
+      "notes": "Synthetic test, not a captured live response. DNS-only providers have no positive HTTP expectation; candidate text/status must remain inconclusive."
+    },
+    {
+      "id": "azure_app_service-ambiguous",
+      "provider": "azure_app_service",
+      "kind": "ambiguous",
+      "cname": "app.azurewebsites.net",
+      "status_code": 404,
+      "headers": {},
+      "body": "Azure 404 (Web App not found)",
+      "body_truncated": false,
+      "expected": "UNKNOWN",
+      "sources": [
+        "https://learn.microsoft.com/en-us/azure/security/fundamentals/subdomain-takeover",
+        "https://learn.microsoft.com/en-us/troubleshoot/azure/app-service/connection-issues-with-ssl-or-tls/troubleshoot-custom-domain-issues-azure-app-service"
+      ],
+      "notes": "Synthetic test, not a captured live response. DNS-only providers have no positive HTTP expectation; candidate text/status must remain inconclusive."
+    },
+    {
+      "id": "heroku-provider_present",
+      "provider": "heroku",
+      "kind": "provider_present",
+      "cname": "app.herokudns.com",
+      "status_code": 404,
+      "headers": {},
+      "body": "<title>No such app | Heroku </title> There's nothing here, yet.",
+      "body_truncated": false,
+      "expected": "UNKNOWN",
+      "sources": [
+        "https://devcenter.heroku.com/articles/custom-domains",
+        "https://help.heroku.com/DRD4AWY7/why-don-t-i-see-my-site-when-i-access-my-custom-domain",
+        "https://devcenter.heroku.com/articles/error-pages",
+        "https://www.herokucdn.com/error-pages/no-such-app.html",
+        "https://devcenter.heroku.com/articles/error-codes#h31-misdirected-request"
+      ],
+      "notes": "Synthetic test, not a captured live response. DNS-only providers have no positive HTTP expectation; candidate text/status must remain inconclusive."
+    },
+    {
+      "id": "heroku-negative",
+      "provider": "heroku",
+      "kind": "negative",
+      "cname": "app.herokudns.com",
+      "status_code": 200,
+      "headers": {},
+      "body": "Ordinary healthy application page",
+      "body_truncated": false,
+      "expected": "UNKNOWN",
+      "sources": [
+        "https://devcenter.heroku.com/articles/custom-domains",
+        "https://help.heroku.com/DRD4AWY7/why-don-t-i-see-my-site-when-i-access-my-custom-domain",
+        "https://devcenter.heroku.com/articles/error-pages",
+        "https://www.herokucdn.com/error-pages/no-such-app.html",
+        "https://devcenter.heroku.com/articles/error-codes#h31-misdirected-request"
+      ],
+      "notes": "Synthetic test, not a captured live response. DNS-only providers have no positive HTTP expectation; candidate text/status must remain inconclusive."
+    },
+    {
+      "id": "heroku-ambiguous",
+      "provider": "heroku",
+      "kind": "ambiguous",
+      "cname": "app.herokudns.com",
+      "status_code": 404,
+      "headers": {},
+      "body": "<title>No such app | Heroku </title> There's nothing here, yet.",
+      "body_truncated": false,
+      "expected": "UNKNOWN",
+      "sources": [
+        "https://devcenter.heroku.com/articles/custom-domains",
+        "https://help.heroku.com/DRD4AWY7/why-don-t-i-see-my-site-when-i-access-my-custom-domain",
+        "https://devcenter.heroku.com/articles/error-pages",
+        "https://www.herokucdn.com/error-pages/no-such-app.html",
+        "https://devcenter.heroku.com/articles/error-codes#h31-misdirected-request"
+      ],
+      "notes": "Synthetic test, not a captured live response. DNS-only providers have no positive HTTP expectation; candidate text/status must remain inconclusive."
+    },
+    {
+      "id": "vercel-provider_present",
+      "provider": "vercel",
+      "kind": "provider_present",
+      "cname": "project.vercel-dns-017.com",
+      "status_code": 404,
+      "headers": {},
+      "body": "DEPLOYMENT_NOT_FOUND",
+      "body_truncated": false,
+      "expected": "SUSPICIOUS",
+      "sources": [
+        "https://vercel.com/docs/domains/working-with-domains/add-a-domain",
+        "https://vercel.com/docs/errors/deployment_not_found"
+      ],
+      "notes": "Synthetic test, not a captured live response. DNS-only providers have no positive HTTP expectation; candidate text/status must remain inconclusive."
+    },
+    {
+      "id": "vercel-negative",
+      "provider": "vercel",
+      "kind": "negative",
+      "cname": "project.vercel-dns-017.com",
+      "status_code": 200,
+      "headers": {},
+      "body": "Ordinary healthy application page",
+      "body_truncated": false,
+      "expected": "NO_EVIDENCE",
+      "sources": [
+        "https://vercel.com/docs/domains/working-with-domains/add-a-domain",
+        "https://vercel.com/docs/errors/deployment_not_found"
+      ],
+      "notes": "Synthetic test, not a captured live response. DNS-only providers have no positive HTTP expectation; candidate text/status must remain inconclusive."
+    },
+    {
+      "id": "vercel-ambiguous",
+      "provider": "vercel",
+      "kind": "ambiguous",
+      "cname": "project.vercel-dns-017.com",
+      "status_code": 404,
+      "headers": {},
+      "body": "DEPLOYMENT_NOT_FOUND",
+      "body_truncated": true,
+      "expected": "UNKNOWN",
+      "sources": [
+        "https://vercel.com/docs/domains/working-with-domains/add-a-domain",
+        "https://vercel.com/docs/errors/deployment_not_found"
+      ],
+      "notes": "Synthetic test, not a captured live response. DNS-only providers have no positive HTTP expectation; candidate text/status must remain inconclusive."
+    },
+    {
+      "id": "netlify-provider_present",
+      "provider": "netlify",
+      "kind": "provider_present",
+      "cname": "site.netlify.app",
+      "status_code": 404,
+      "headers": {},
+      "body": "404 Not Found",
+      "body_truncated": false,
+      "expected": "UNKNOWN",
+      "sources": [
+        "https://docs.netlify.com/manage/domains/configure-domains/configure-external-dns/",
+        "https://www.netlify.com/changelog/enhanced-security-with-domain-dns-verification/",
+        "https://docs.netlify.com/manage/domains/troubleshooting-tips/"
+      ],
+      "notes": "Synthetic test, not a captured live response. DNS-only providers have no positive HTTP expectation; candidate text/status must remain inconclusive."
+    },
+    {
+      "id": "netlify-negative",
+      "provider": "netlify",
+      "kind": "negative",
+      "cname": "site.netlify.app",
+      "status_code": 200,
+      "headers": {},
+      "body": "Ordinary healthy application page",
+      "body_truncated": false,
+      "expected": "UNKNOWN",
+      "sources": [
+        "https://docs.netlify.com/manage/domains/configure-domains/configure-external-dns/",
+        "https://www.netlify.com/changelog/enhanced-security-with-domain-dns-verification/",
+        "https://docs.netlify.com/manage/domains/troubleshooting-tips/"
+      ],
+      "notes": "Synthetic test, not a captured live response. DNS-only providers have no positive HTTP expectation; candidate text/status must remain inconclusive."
+    },
+    {
+      "id": "netlify-ambiguous",
+      "provider": "netlify",
+      "kind": "ambiguous",
+      "cname": "site.netlify.app",
+      "status_code": 404,
+      "headers": {},
+      "body": "404 Not Found",
+      "body_truncated": false,
+      "expected": "UNKNOWN",
+      "sources": [
+        "https://docs.netlify.com/manage/domains/configure-domains/configure-external-dns/",
+        "https://www.netlify.com/changelog/enhanced-security-with-domain-dns-verification/",
+        "https://docs.netlify.com/manage/domains/troubleshooting-tips/"
+      ],
+      "notes": "Synthetic test, not a captured live response. DNS-only providers have no positive HTTP expectation; candidate text/status must remain inconclusive."
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+# Local environments and configuration
+.venv*/
+venv/
+env/
+.env
+.env.*
+
+# Python caches, build artifacts and test output
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# Local scan inputs/reports and temporary files
+/subdomains.txt
+/reports/
+/report.json
+/report-*.json
+/stdout-report.json
+/scan-results*.json
+*.log
+*.tmp
+*.bak
+*~
+.DS_Store
+.idea/
+.vscode/
+
+# Private material: only the explicitly documented synthetic lab TLS fixtures ship.
+*.key
+*.pem
+*.p12
+*.pfx
+*.jks
+*.keystore
+!/integration_lab/fixtures/lab-ca.pem
+!/integration_lab/fixtures/server-cert.pem
+!/integration_lab/fixtures/server-key.pem

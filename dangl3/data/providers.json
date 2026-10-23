@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-10-23",
+  "providers": [
+    {
+      "id": "github_pages",
+      "name": "GitHub Pages",
+      "dns_suffixes": [
+        "github.io"
+      ],
+      "fingerprints": [],
+      "sources": [
+        "https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site",
+        "https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages"
+      ],
+      "limitations": "DNS identification only. Domain verification can prevent domain reuse. Current official guidance describes disabled sites but does not establish a stable HTTP error-page contract for this release; no HTTP rule is activated. Claimability is not checked.",
+      "last_reviewed": "2026-10-23",
+      "review_basis": "documentation"
+    },
+    {
+      "id": "aws_s3_website",
+      "name": "AWS S3 website hosting",
+      "dns_suffixes": [
+        "s3-website-us-east-1.amazonaws.com",
+        "s3-website.us-east-2.amazonaws.com",
+        "s3-website-us-west-1.amazonaws.com",
+        "s3-website-us-west-2.amazonaws.com",
+        "s3-website.af-south-1.amazonaws.com",
+        "s3-website.ap-east-1.amazonaws.com",
+        "s3-website.ap-east-2.amazonaws.com",
+        "s3-website.ap-south-1.amazonaws.com",
+        "s3-website.ap-south-2.amazonaws.com",
+        "s3-website-ap-northeast-1.amazonaws.com",
+        "s3-website.ap-northeast-2.amazonaws.com",
+        "s3-website.ap-northeast-3.amazonaws.com",
+        "s3-website-ap-southeast-1.amazonaws.com",
+        "s3-website-ap-southeast-2.amazonaws.com",
+        "s3-website.ap-southeast-3.amazonaws.com",
+        "s3-website.ap-southeast-4.amazonaws.com",
+        "s3-website.ap-southeast-5.amazonaws.com",
+        "s3-website.ap-southeast-6.amazonaws.com",
+        "s3-website.ap-southeast-7.amazonaws.com",
+        "s3-website.ca-central-1.amazonaws.com",
+        "s3-website.ca-west-1.amazonaws.com",
+        "s3-website.eu-central-1.amazonaws.com",
+        "s3-website.eu-central-2.amazonaws.com",
+        "s3-website.eu-north-1.amazonaws.com",
+        "s3-website.eu-south-1.amazonaws.com",
+        "s3-website.eu-south-2.amazonaws.com",
+        "s3-website-eu-west-1.amazonaws.com",
+        "s3-website.eu-west-2.amazonaws.com",
+        "s3-website.eu-west-3.amazonaws.com",
+        "s3-website.il-central-1.amazonaws.com",
+        "s3-website.mx-central-1.amazonaws.com",
+        "s3-website.me-south-1.amazonaws.com",
+        "s3-website.me-central-1.amazonaws.com",
+        "s3-website-sa-east-1.amazonaws.com"
+      ],
+      "sources": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteEndpoints.html",
+        "https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints",
+        "https://docs.aws.amazon.com/AmazonS3/latest/API/API_Error.html",
+        "https://aws.amazon.com/blogs/security/threat-tactic-spotlight-subdomain-takeover/"
+      ],
+      "limitations": "Curated commercial-region website endpoints only; REST, access points, China and GovCloud endpoints are omitted. A missing bucket is not proof that its name can be registered. Namespace, ownership and account protections are not checked. Website endpoints use HTTP.",
+      "fingerprints": [
+        {
+          "id": "s3-website-no-such-bucket",
+          "status_codes": [
+            404
+          ],
+          "body_all": [
+            "NoSuchBucket",
+            "The specified bucket does not exist"
+          ],
+          "headers_all": {
+            "server": "AmazonS3"
+          },
+          "negative_body": [
+            "NoSuchKey",
+            "NoSuchWebsiteConfiguration",
+            "AccessDenied"
+          ],
+          "experimental": false,
+          "outcome": "potential",
+          "sources": [
+            "https://docs.aws.amazon.com/AmazonS3/latest/API/API_Error.html",
+            "https://docs.aws.amazon.com/AmazonS3/latest/userguide/CustomErrorDocSupport.html"
+          ],
+          "limitations": "Matches a documented missing-bucket error, not resource claimability. Require a recognized S3 website CNAME, HTTP 404, both error strings and the AmazonS3 server header. Website error rendering may change; customized or truncated errors can be missed."
+        }
+      ],
+      "last_reviewed": "2026-10-23",
+      "review_basis": "documentation"
+    },
+    {
+      "id": "azure_app_service",
+      "name": "Azure App Service",
+      "dns_suffixes": [
+        "azurewebsites.net"
+      ],
+      "fingerprints": [],
+      "sources": [
+        "https://learn.microsoft.com/en-us/azure/security/fundamentals/subdomain-takeover",
+        "https://learn.microsoft.com/en-us/troubleshoot/azure/app-service/connection-issues-with-ssl-or-tls/troubleshoot-custom-domain-issues-azure-app-service"
+      ],
+      "limitations": "DNS identification only. Official guidance describes custom-domain binding errors, not an unclaimed-resource HTTP contract. Verification IDs, tenant state and name reservations are not inspected. Generic Azure 404/403 pages are not takeover evidence.",
+      "last_reviewed": "2026-10-23",
+      "review_basis": "documentation"
+    },
+    {
+      "id": "heroku",
+      "name": "Heroku",
+      "dns_suffixes": [
+        "herokudns.com",
+        "herokuapp.com"
+      ],
+      "fingerprints": [],
+      "sources": [
+        "https://devcenter.heroku.com/articles/custom-domains",
+        "https://help.heroku.com/DRD4AWY7/why-don-t-i-see-my-site-when-i-access-my-custom-domain",
+        "https://devcenter.heroku.com/articles/error-pages",
+        "https://www.herokucdn.com/error-pages/no-such-app.html",
+        "https://devcenter.heroku.com/articles/error-codes#h31-misdirected-request"
+      ],
+      "limitations": "DNS identification only. The official no-such-app template was fetched for review, but current router status/headers and their relation to unclaimed resources could not be verified. No HTTP rule is activated. Stale routing, missing custom-domain bindings and platform generations can differ; template text alone does not establish claimability.",
+      "last_reviewed": "2026-10-23",
+      "review_basis": "official_template"
+    },
+    {
+      "id": "vercel",
+      "name": "Vercel",
+      "dns_suffixes": [
+        "vercel.app",
+        "vercel-dns.com",
+        "vercel-dns-017.com"
+      ],
+      "sources": [
+        "https://vercel.com/docs/domains/working-with-domains/add-a-domain",
+        "https://vercel.com/docs/errors/deployment_not_found"
+      ],
+      "limitations": "Documented vercel-dns-017.com targets are recognized explicitly; other numbered DNS zones are omitted. Missing deployment errors do not establish unclaimed custom domains. Ownership checks and deployment access controls are not inspected.",
+      "fingerprints": [
+        {
+          "id": "vercel-deployment-not-found",
+          "status_codes": [
+            404
+          ],
+          "body_all": [
+            "DEPLOYMENT_NOT_FOUND"
+          ],
+          "headers_all": {},
+          "negative_body": [],
+          "experimental": false,
+          "outcome": "suspicious",
+          "sources": [
+            "https://vercel.com/docs/errors/deployment_not_found"
+          ],
+          "limitations": "The documented code indicates an unavailable deployment, possibly a deleted deployment or incorrect URL. It does not establish an unclaimed custom domain and can only yield SUSPICIOUS."
+        }
+      ],
+      "last_reviewed": "2026-10-23",
+      "review_basis": "documentation"
+    },
+    {
+      "id": "netlify",
+      "name": "Netlify",
+      "dns_suffixes": [
+        "netlify.app"
+      ],
+      "fingerprints": [],
+      "sources": [
+        "https://docs.netlify.com/manage/domains/configure-domains/configure-external-dns/",
+        "https://www.netlify.com/changelog/enhanced-security-with-domain-dns-verification/",
+        "https://docs.netlify.com/manage/domains/troubleshooting-tips/"
+      ],
+      "limitations": "DNS identification only. The exact documented apex load-balancer hostname is recognized in addition to netlify.app targets. Current official documentation does not provide a reliable distinct unclaimed-resource HTTP contract; generic missing-site pages remain inconclusive. Domain verification may protect reuse.",
+      "last_reviewed": "2026-10-23",
+      "review_basis": "documentation",
+      "dns_exact": [
+        "apex-loadbalancer.netlify.com"
+      ]
+    }
+  ]
+}

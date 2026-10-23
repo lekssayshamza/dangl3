@@ -1,0 +1,49 @@
+{
+  "s3_missing": {
+    "status": 404,
+    "headers": {"Server": "AmazonS3"},
+    "body": "NoSuchBucket: The specified bucket does not exist"
+  },
+  "vercel_missing": {
+    "status": 404,
+    "headers": {},
+    "body": "DEPLOYMENT_NOT_FOUND"
+  },
+  "generic_404": {
+    "status": 404,
+    "headers": {"Server": "AmazonS3"},
+    "body": "404 Not Found"
+  },
+  "healthy": {
+    "status": 200,
+    "headers": {"Server": "AmazonS3"},
+    "body": "Synthetic healthy hosted application"
+  },
+  "ambiguous": {
+    "status": 404,
+    "headers": {"Server": "AmazonS3"},
+    "body": "NoSuchBucket: The specified bucket does not exist. Conflicting indicator: NoSuchKey"
+  },
+  "body_limit": {
+    "status": 404,
+    "headers": {"Server": "AmazonS3"},
+    "body": "NoSuchBucket: The specified bucket does not exist\n",
+    "padding_bytes": 4096
+  },
+  "unsafe_redirect": {
+    "status": 302,
+    "headers": {"Location": "http://outside.dangl3.test/"},
+    "body": ""
+  },
+  "rebind_redirect": {
+    "status": 302,
+    "headers": {"Location": "/after-redirect"},
+    "body": ""
+  },
+  "incomplete": {
+    "status": 404,
+    "headers": {"Server": "AmazonS3"},
+    "body": "NoSuchBucket: The specified bucket does not exist",
+    "missing_bytes": 128
+  }
+}
